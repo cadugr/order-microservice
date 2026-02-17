@@ -1,0 +1,29 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    username: ${DB_USER:orders}
+    password: ${DB_PASSWORD:orders}
+  liquibase:
+    migrate-at-start: true
+    change-log: db/changelog/db.changelog-master.yml
+  native:
+    additional-build-args: --initialize-at-run-time=br.com.coffeemarket.config.utility.IdGenerator
+  swagger-ui:
+    always-include: true
+
+kafka:
+  bootstrap:
+    servers: kafka:29092
+mp:
+  messaging:
+    outgoing:
+      orders-out:
+        connector: smallrye-kafka
+        topic: orders
+        value:
+          serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer
+---
+"%dev":
+  kafka:
+    bootstrap:
+      servers: localhost:9092

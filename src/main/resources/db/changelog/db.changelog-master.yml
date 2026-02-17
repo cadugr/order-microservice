@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: v1.0.0/001-create-salesorder-table.sql
+      relativeToChangelogFile: true
