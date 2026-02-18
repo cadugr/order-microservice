@@ -27,3 +27,13 @@ mp:
   kafka:
     bootstrap:
       servers: localhost:9092
+---
+"%test":
+  kafka:
+    bootstrap:
+      servers: localhost:9092 # Dummy value for tests
+  mp:
+    messaging:
+      connector:
+        smallrye-kafka:
+          enabled: false # Disable Kafka connector for tests

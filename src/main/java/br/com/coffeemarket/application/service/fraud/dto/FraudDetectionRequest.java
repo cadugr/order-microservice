@@ -1,5 +1,6 @@
 package br.com.coffeemarket.application.service.fraud.dto;
 
+import br.com.coffeemarket.adapter.dto.OrderCreateRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,13 @@ public class FraudDetectionRequest {
     @Schema(description = "Currency of the order (e.g., BRL, USD)", defaultValue = "BRL")
     private String currency;
     // Add other relevant fields for fraud detection from OrderCreateRequest if needed
+
+    public static FraudDetectionRequest toFraudDetectionRequest(OrderCreateRequest request) {
+        FraudDetectionRequest fraudRequest = new FraudDetectionRequest();
+        fraudRequest.setOrderDate(request.getOrderDate());
+        fraudRequest.setCustomerName(request.getCustomerName());
+        fraudRequest.setTotalAmount(request.getTotalAmount());
+        fraudRequest.setCurrency(request.getCurrency());
+        return fraudRequest;
+    }
 }

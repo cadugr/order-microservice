@@ -1,4 +1,4 @@
-package br.com.coffeemarket.adapter.in.rest.dto;
+package br.com.coffeemarket.adapter.dto;
 
 import br.com.coffeemarket.application.domain.enuns.OrderStatus;
 import lombok.AllArgsConstructor;
@@ -8,15 +8,12 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "OrderResponse", description = "DTO for order response")
-public class OrderResponse {
-    @Schema(description = "Unique identifier of the order", defaultValue = "a1b2c3d4-e5f6-7890-1234-567890abcdef", implementation = String.class, format = "uuid")
-    private UUID id;
+@Schema(name = "OrderCreateRequest", description = "DTO for creating a new order")
+public class OrderCreateRequest {
     @Schema(description = "Date and time of the order", defaultValue = "2023-10-27T10:00:00Z", implementation = String.class, format = "date-time")
     private OffsetDateTime orderDate;
     @Schema(description = "Name of the customer placing the order", defaultValue = "John Doe")
@@ -27,8 +24,4 @@ public class OrderResponse {
     private String currency;
     @Schema(description = "Current status of the order", defaultValue = "CREATED", enumeration = {"CREATED", "PENDING", "FRAUD_DETECTED"})
     private OrderStatus status;
-    @Schema(description = "Timestamp when the order was created", defaultValue = "2023-10-27T09:00:00Z", implementation = String.class, format = "date-time")
-    private OffsetDateTime createdAt;
-    @Schema(description = "Timestamp when the order was last updated", defaultValue = "2023-10-27T10:00:00Z", implementation = String.class, format = "date-time")
-    private OffsetDateTime updatedAt;
 }

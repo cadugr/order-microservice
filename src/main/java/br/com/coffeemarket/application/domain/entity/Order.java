@@ -1,5 +1,6 @@
 package br.com.coffeemarket.application.domain.entity;
 
+import br.com.coffeemarket.adapter.dto.OrderCreateRequest;
 import br.com.coffeemarket.application.domain.enuns.OrderStatus;
 import br.com.coffeemarket.config.utility.IdGenerator;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
@@ -57,5 +58,15 @@ public class Order extends PanacheEntityBase {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = OffsetDateTime.now();
+    }
+
+    public static Order toEntity(OrderCreateRequest request) {
+        Order order = new Order();
+        order.setOrderDate(request.getOrderDate());
+        order.setCustomerName(request.getCustomerName());
+        order.setTotalAmount(request.getTotalAmount());
+        order.setCurrency(request.getCurrency());
+        order.setStatus(request.getStatus());
+        return order;
     }
 }
